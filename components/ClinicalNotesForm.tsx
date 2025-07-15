@@ -1,27 +1,29 @@
 import React, { useRef } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 
+interface ClinicalNotes {
+  chiefComplaint: string;
+  duration: string;
+  history: string;
+  primaryDxCode: string;
+  primaryDxDesc: string;
+  secondaryDxList: string[];
+  secondaryDxInput: string;
+  procedures: { code: string; desc: string; type: string; qty: string }[];
+  procedureInput: { code: string; desc: string; type: string; qty: string };
+  medications: { name: string; dose: string; freq: string }[];
+  medInput: { name: string; dose: string; freq: string };
+  treatmentPlan: string;
+  referredTo: string;
+  referralReason: string;
+  doctorName: string;
+  acknowledged: boolean;
+  remarks: string;
+}
+
 interface ClinicalNotesFormProps {
-  clinicalNotes: {
-    chiefComplaint: string;
-    duration: string;
-    history: string;
-    primaryDxCode: string;
-    primaryDxDesc: string;
-    secondaryDxList: string[];
-    secondaryDxInput: string;
-    procedures: { code: string; desc: string; type: string; qty: string }[];
-    procedureInput: { code: string; desc: string; type: string; qty: string };
-    medications: { name: string; dose: string; freq: string }[];
-    medInput: { name: string; dose: string; freq: string };
-    treatmentPlan: string;
-    referredTo: string;
-    referralReason: string;
-    doctorName: string;
-    acknowledged: boolean;
-    remarks: string;
-  };
-  setClinicalNotes: React.Dispatch<React.SetStateAction<ClinicalNotesFormProps['clinicalNotes']>>;
+  clinicalNotes: ClinicalNotes;
+  setClinicalNotes: React.Dispatch<React.SetStateAction<ClinicalNotes>>;
 }
 
 const ClinicalNotesForm: React.FC<ClinicalNotesFormProps> = ({
@@ -164,7 +166,7 @@ const ClinicalNotesForm: React.FC<ClinicalNotesFormProps> = ({
       {/* Secondary Diagnosis List */}
       {clinicalNotes.secondaryDxList.map((dx, i) => (
         <div
-          key={i}
+          key={i} // Ensure this is unique if possible
           className="mt-2 bg-gray-100 px-3 py-1 rounded flex justify-between items-center"
         >
           <span>{dx}</span>

@@ -45,10 +45,10 @@ const PatientInfoForm: React.FC<Props> = ({ patientInfo, setPatientInfo }) => {
         <input name="dob" type="date" className="input" value={patientInfo.dob} onChange={handleChange} />
         <input name="age" type="text" value={patientInfo.age} className="input bg-gray-100" onChange={handleChange} placeholder="Age" />
         <select name="gender" className="input" value={patientInfo.gender} onChange={handleChange}>
-          <option>Select Gender</option>
-          <option>Male</option>
-          <option>Female</option>
-          <option>Other</option>
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
         </select>
         <input name="insuranceId" type="text" placeholder="Insurance ID" className="input" value={patientInfo.insuranceId} onChange={handleChange} />
         <input name="insuranceName" type="text" placeholder="e.g., Blue Cross Blue Shield" className="input" value={patientInfo.insuranceName} onChange={handleChange} />

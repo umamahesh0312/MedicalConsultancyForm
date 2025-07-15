@@ -36,7 +36,7 @@ const VisitWiseOrders: React.FC<VisitWiseOrdersProps> = ({
       <div className="flex gap-4 overflow-x-auto">
         {visits.map((visit) => (
           <div
-            key={visit.id}
+            key={visit.id} // Use visit.id as the unique key
             className={`min-w-[140px] p-4 rounded cursor-pointer border text-center transition-all ${
               selectedVisit === visit.id
                 ? 'bg-blue-100 border-blue-500 text-blue-800'
