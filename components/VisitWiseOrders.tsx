@@ -19,7 +19,7 @@ const VisitWiseOrders: React.FC<VisitWiseOrdersProps> = ({
   selectedVisit,
   setSelectedVisit,
   additionalNotes,
-  setAdditionalNotes
+  setAdditionalNotes,
 }) => {
   const visits: Visit[] = [
     { id: 'VST-12345', date: '10/07/2025' },
@@ -29,6 +29,33 @@ const VisitWiseOrders: React.FC<VisitWiseOrdersProps> = ({
     { id: 'VST-12349', date: '06/07/2025' },
   ];
 
+  const labOrdersData = [
+    {
+      id: 'LAB-001',
+      cpt: '80053',
+      desc: 'Metabolic Panel',
+      qty: '1',
+      changedBy: 'EMP-001',
+      status: 'Pending',
+    },
+    {
+      id: 'LAB-002',
+      cpt: '83036',
+      desc: 'Hemoglobin A1C',
+      qty: '1',
+      changedBy: 'EMP-220',
+      status: 'In Process',
+    },
+    {
+      id: 'LAB-003',
+      cpt: '81003',
+      desc: 'Urinalysis',
+      qty: '1',
+      changedBy: 'EMP-001',
+      status: 'Completed',
+    },
+  ];
+
   return (
     <div className="space-y-6">
       {/* Recent Visits */}
@@ -36,7 +63,7 @@ const VisitWiseOrders: React.FC<VisitWiseOrdersProps> = ({
       <div className="flex gap-4 overflow-x-auto">
         {visits.map((visit) => (
           <div
-            key={visit.id} // Use visit.id as the unique key
+            key={visit.id}
             className={`min-w-[140px] p-4 rounded cursor-pointer border text-center transition-all ${
               selectedVisit === visit.id
                 ? 'bg-blue-100 border-blue-500 text-blue-800'
@@ -68,11 +95,17 @@ const VisitWiseOrders: React.FC<VisitWiseOrdersProps> = ({
           </>
         }
         columns={['Lab Order #', 'CPT Code', 'Description', 'Qty', 'Status changed by', 'Status']}
-        data={[
-          ['LAB-001', '80053', 'Metabolic Panel', '1', 'EMP-001', <Badge label="Pending" color="yellow" />],
-          ['LAB-002', '83036', 'Hemoglobin A1C', '1', 'EMP-220', <Badge label="In Process" color="blue" />],
-          ['LAB-003', '81003', 'Urinalysis', '1', 'EMP-001', <Badge label="Completed" color="green" />],
-        ]}
+        data={labOrdersData.map((order) => [
+          order.id,
+          order.cpt,
+          order.desc,
+          order.qty,
+          order.changedBy,
+          <Badge key={order.id} label={order.status} color={
+            order.status === 'Pending' ? 'yellow' :
+            order.status === 'In Process' ? 'blue' : 'green'
+          } />
+        ])}
       />
 
       {/* Radiology Orders */}
@@ -131,7 +164,7 @@ const VisitWiseOrders: React.FC<VisitWiseOrdersProps> = ({
       <div className="mt-6">
         <label className="text-xs font-medium block mb-1">Additional Notes</label>
         <textarea
-          className="w-full h-24 border border-blue-300 rounded px-3 py-2 text-[11px] focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full h-24 border border-gray-300 rounded px-3 py-2 text-[11px] focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           placeholder="Any special instructions or medical conditions..."
           value={additionalNotes}
           onChange={(e) => setAdditionalNotes(e.target.value)}
