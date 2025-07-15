@@ -1,21 +1,23 @@
 import React from 'react';
 
+interface PatientInfo {
+  uhid: string;
+  firstName: string;
+  lastName: string;
+  phone1: string;
+  phone2: string;
+  nationality: string;
+  dob: string;
+  age: string;
+  gender: string;
+  insuranceId: string;
+  insuranceName: string;
+  payer: string;
+}
+
 interface Props {
-  patientInfo: {
-    uhid: string;
-    firstName: string;
-    lastName: string;
-    phone1: string;
-    phone2: string;
-    nationality: string;
-    dob: string;
-    age: string;
-    gender: string;
-    insuranceId: string;
-    insuranceName: string;
-    payer: string;
-  };
-  setPatientInfo: React.Dispatch<React.SetStateAction<any>>;
+  patientInfo: PatientInfo;
+  setPatientInfo: React.Dispatch<React.SetStateAction<PatientInfo>>;
 }
 
 const PatientInfoForm: React.FC<Props> = ({ patientInfo, setPatientInfo }) => {
@@ -41,7 +43,7 @@ const PatientInfoForm: React.FC<Props> = ({ patientInfo, setPatientInfo }) => {
         <input name="phone2" type="text" placeholder="Alternate Number" className="input" value={patientInfo.phone2} onChange={handleChange} />
         <input name="nationality" type="text" placeholder="Nationality" className="input" value={patientInfo.nationality} onChange={handleChange} />
         <input name="dob" type="date" className="input" value={patientInfo.dob} onChange={handleChange} />
-        <input name="age" type="text" value={patientInfo.age}  className="input bg-gray-100" onChange={handleChange} placeholder="Age"/>
+        <input name="age" type="text" value={patientInfo.age} className="input bg-gray-100" onChange={handleChange} placeholder="Age" />
         <select name="gender" className="input" value={patientInfo.gender} onChange={handleChange}>
           <option>Select Gender</option>
           <option>Male</option>

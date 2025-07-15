@@ -3,9 +3,24 @@ import Header from '../components/Header';
 import NavTabs from '../components/NavTabs';
 import PatientInfoForm from '../components/PatientInfoForm';
 
-const PatientInfoPage = () => {
-  const [activeTab, setActiveTab] = useState('Patient Information');
-  const [patientInfo, setPatientInfo] = useState({
+interface PatientInfo {
+  uhid: string;
+  firstName: string;
+  lastName: string;
+  phone1: string;
+  phone2: string;
+  nationality: string;
+  dob: string;
+  age: string;
+  gender: string;
+  insuranceId: string;
+  insuranceName: string;
+  payer: string;
+}
+
+const PatientInfoPage: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<string>('Patient Information');
+  const [patientInfo, setPatientInfo] = useState<PatientInfo>({
     uhid: '',
     firstName: '',
     lastName: '',

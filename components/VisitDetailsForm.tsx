@@ -1,15 +1,17 @@
 import React from 'react';
 
+interface VisitDetails {
+  visitId: string;
+  visitDate: string;
+  visitTime: string;
+  doctor: string;
+  department: string;
+  visitType: string;
+}
+
 interface VisitDetailsProps {
-  visitDetails: {
-    visitId: string;
-    visitDate: string;
-    visitTime: string;
-    doctor: string;
-    department: string;
-    visitType: string;
-  };
-  setVisitDetails: React.Dispatch<React.SetStateAction<any>>;
+  visitDetails: VisitDetails;
+  setVisitDetails: React.Dispatch<React.SetStateAction<VisitDetails>>;
 }
 
 const VisitDetailsForm: React.FC<VisitDetailsProps> = ({ visitDetails, setVisitDetails }) => {

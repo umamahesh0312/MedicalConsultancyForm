@@ -1,18 +1,20 @@
 import React from 'react';
 
+interface Vitals {
+  date: string;
+  time: string;
+  height: string;
+  weight: string;
+  temperature: string;
+  spo2: string;
+  bp: string;
+  pulse: string;
+  respiratoryRate: string;
+}
+
 interface VitalsFormProps {
-  vitals: {
-    date: string;
-    time: string;
-    height: string;
-    weight: string;
-    temperature: string;
-    spo2: string;
-    bp: string;
-    pulse: string;
-    respiratoryRate: string;
-  };
-  setVitals: React.Dispatch<React.SetStateAction<any>>;
+  vitals: Vitals;
+  setVitals: React.Dispatch<React.SetStateAction<Vitals>>;
 }
 
 const VitalsForm: React.FC<VitalsFormProps> = ({ vitals, setVitals }) => {

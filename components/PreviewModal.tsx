@@ -1,12 +1,53 @@
 import React, { forwardRef } from 'react';
 
+interface PatientInfo {
+  firstName: string;
+  lastName: string;
+  uhid: string;
+  dob: string;
+  age: string;
+  gender: string;
+  phone1: string;
+  nationality: string;
+  insuranceName: string;
+}
+
+interface VisitDetails {
+  visitId?: string;
+}
+
+interface Vitals {
+  height: number;
+  weight: number;
+  temperature: number;
+  spo2: number;
+  bp: string;
+  pulse: number;
+  respiratoryRate: number;
+  date: string;
+  time: string;
+}
+
+interface ClinicalNotes {
+  chiefComplaint: string;
+  duration: string;
+  history: string;
+  primaryDxCode: string;
+  primaryDxDesc: string;
+  secondaryDxList: string[];
+  medications: { name: string; dose: string; freq: string }[];
+  treatmentPlan: string;
+  doctorName?: string;
+  referredTo?: string;
+}
+
 interface PreviewModalProps {
   onClose: () => void;
   onPrint: () => void;
-  patientInfo: any;
-  visitDetails: any;
-  vitals: any;
-  clinicalNotes: any;
+  patientInfo: PatientInfo;
+  visitDetails: VisitDetails;
+  vitals: Vitals;
+  clinicalNotes: ClinicalNotes;
   selectedVisit: string | null;
   additionalNotes: string;
 }
@@ -119,7 +160,7 @@ const PreviewModal = forwardRef<HTMLDivElement, PreviewModalProps>(
             <Section title="Medications">
               {clinicalNotes.medications.length > 0 ? (
                 <ul className="list-disc pl-6 text-sm text-gray-800 col-span-2">
-                  {clinicalNotes.medications.map((med: any, idx: number) => (
+                  {clinicalNotes.medications.map((med, idx) => (
                     <li key={idx}>
                       {med.name} – {med.dose} – {med.freq}
                     </li>

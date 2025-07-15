@@ -21,15 +21,15 @@ interface ClinicalNotesFormProps {
     acknowledged: boolean;
     remarks: string;
   };
-  setClinicalNotes: React.Dispatch<React.SetStateAction<any>>;
+  setClinicalNotes: React.Dispatch<React.SetStateAction<ClinicalNotesFormProps['clinicalNotes']>>;
 }
 
 const ClinicalNotesForm: React.FC<ClinicalNotesFormProps> = ({
   clinicalNotes,
   setClinicalNotes
 }) => {
-  const doctorSigRef = useRef<any>(null);
-  const patientSigRef = useRef<any>(null);
+  const doctorSigRef = useRef<SignatureCanvas>(null);
+  const patientSigRef = useRef<SignatureCanvas>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setClinicalNotes({ ...clinicalNotes, [e.target.name]: e.target.value });
@@ -320,7 +320,7 @@ const ClinicalNotesForm: React.FC<ClinicalNotesFormProps> = ({
               onChange={handleCheckbox}
               className="accent-blue-600"
             />
-            I am Dr. {clinicalNotes.doctorName || ''} ,treating doctor of the above patient and all the information provided in claims form are best of my experience and are true of best of my knowledge
+            I am Dr. {clinicalNotes.doctorName || ''}, treating doctor of the above patient and all the information provided in claims form are best of my experience and are true to the best of my knowledge.
           </label>
         </div>
       </div>
@@ -340,7 +340,7 @@ const ClinicalNotesForm: React.FC<ClinicalNotesFormProps> = ({
           })}
         </span>
 
-      <p className="flex items-center gap-2 text-sm">This is a computer genearted program .Valid with digital signature and deal</p>
+        <p className="flex items-center gap-2 text-sm">This is a computer-generated program. Valid with digital signature and deal.</p>
 
         <button className="bg-blue-600 text-white px-4 py-2 mt-4 rounded">
           Claim Form (Save)
