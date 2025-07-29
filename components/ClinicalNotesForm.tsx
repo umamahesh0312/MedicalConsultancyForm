@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import SignatureCanvas from 'react-signature-canvas';
+import React from 'react';
 
 interface ClinicalNotes {
   chiefComplaint: string;
@@ -30,9 +29,6 @@ const ClinicalNotesForm: React.FC<ClinicalNotesFormProps> = ({
   clinicalNotes,
   setClinicalNotes
 }) => {
-  const doctorSigRef = useRef<SignatureCanvas>(null);
-  const patientSigRef = useRef<SignatureCanvas>(null);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setClinicalNotes({ ...clinicalNotes, [e.target.name]: e.target.value });
   };
@@ -56,7 +52,7 @@ const ClinicalNotesForm: React.FC<ClinicalNotesFormProps> = ({
         <span>Height: N/A cm</span>
       </div>
 
-      {/* Main Content: Grid with Left (2/3) and Right (1/3) */}
+      {/* Main Content */}
       <div className="grid grid-cols-3 mt-2 gap-2">
         {/* LEFT COLUMN */}
         <div className="col-span-2 space-y-2">
