@@ -36,7 +36,7 @@ const VitalsForm: React.FC<VitalsFormProps> = ({ vitals, setVitals }) => {
         <input name="pulse" type="number" placeholder="Pulse Rate (bpm)" className="input" value={vitals.pulse} onChange={handleChange} />
         <input name="respiratoryRate" type="number" placeholder="Respiratory Rate (/min)" className="input" value={vitals.respiratoryRate} onChange={handleChange} />
       </div>
-      <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Send to Doctors</button>
+      <button className="mt-4 bg-[#005F56] text-white px-4 py-2 rounded">Send to Doctors</button>
     </div>
   );
 };

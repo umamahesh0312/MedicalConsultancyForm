@@ -72,7 +72,7 @@ const VisitDetailsForm: React.FC<VisitDetailsProps> = ({ visitDetails, setVisitD
           onChange={handleChange}
         />
       </div>
-      <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Send for Vitals</button>
+      <button className="mt-4 bg-[#005F56] text-white px-4 py-2 rounded">Send for Vitals</button>
     </div>
   );
 };
