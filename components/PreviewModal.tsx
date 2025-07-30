@@ -28,6 +28,23 @@ interface Vitals {
   time: string;
 }
 
+interface Medication {
+  name: string;
+  dose: string;
+  freq: string;
+}
+
+interface ICDCode {
+  code: string;
+  desc: string;
+}
+
+interface Procedure {
+  code: string;
+  desc: string;
+  quantity: number;
+}
+
 interface ClinicalNotes {
   chiefComplaint: string;
   duration: string;
@@ -35,10 +52,12 @@ interface ClinicalNotes {
   primaryDxCode: string;
   primaryDxDesc: string;
   secondaryDxList: string[];
-  medications: { name: string; dose: string; freq: string }[];
+  medications: Medication[];
   treatmentPlan: string;
   doctorName?: string;
   referredTo?: string;
+  icdCodes?: ICDCode[];
+  procedures?: Procedure[];
 }
 
 interface PreviewModalProps {
@@ -56,6 +75,7 @@ const PreviewModal = forwardRef<HTMLDivElement, PreviewModalProps>(
   (
     {
       onClose,
+      onPrint,
       patientInfo,
       visitDetails,
       vitals,
@@ -75,22 +95,17 @@ const PreviewModal = forwardRef<HTMLDivElement, PreviewModalProps>(
       hour12: true,
     });
 
-    const handlePrint = () => {
-      window.print();
-    };
-
     return (
       <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-center items-start overflow-y-auto p-8 print:static print:p-0 print:overflow-visible print:bg-white print:z-auto">
         <div
           ref={ref}
           className="bg-white w-full max-w-5xl rounded shadow-lg p-6 relative print:w-full print:max-w-full print:rounded-none print:shadow-none print:p-6 print:static"
         >
-          {/* Header - hidden in print */}
           <div className="flex justify-between items-center mb-4 border-b pb-2 print:hidden">
             <h2 className="text-2xl font-bold">Medical Claim Form Preview</h2>
             <div className="flex items-center gap-2">
               <button
-                onClick={handlePrint}
+                onClick={onPrint}
                 className="bg-blue-600 text-white px-4 py-1 rounded text-sm"
               >
                 Print
@@ -104,7 +119,6 @@ const PreviewModal = forwardRef<HTMLDivElement, PreviewModalProps>(
             </div>
           </div>
 
-          {/* Form Body */}
           <div className="bg-white border rounded p-6 space-y-6 print:border-none print:rounded-none print:p-0">
             <div className="text-center border-b pb-4 print:border-none">
               <h3 className="text-xl font-bold">Medical Claim Form</h3>
@@ -155,6 +169,34 @@ const PreviewModal = forwardRef<HTMLDivElement, PreviewModalProps>(
               {clinicalNotes.secondaryDxList.map((dx: string, idx: number) => (
                 <TwoColumn key={idx} label={`Secondary ${idx + 1}`} value={dx} />
               ))}
+            </Section>
+
+            <Section title="ICD Codes">
+              {clinicalNotes.icdCodes && clinicalNotes.icdCodes.length > 0 ? (
+                <ul className="list-disc pl-6 col-span-2 text-sm text-gray-800">
+                  {clinicalNotes.icdCodes.map((icd, idx) => (
+                    <li key={idx}>
+                      {icd.code} – {icd.desc}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-sm text-gray-500 col-span-2">No ICD codes</p>
+              )}
+            </Section>
+
+            <Section title="Procedures">
+              {clinicalNotes.procedures && clinicalNotes.procedures.length > 0 ? (
+                <ul className="list-disc pl-6 col-span-2 text-sm text-gray-800">
+                  {clinicalNotes.procedures.map((proc, idx) => (
+                    <li key={idx}>
+                      {proc.code} – {proc.desc} – Qty: {proc.quantity}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-sm text-gray-500 col-span-2">No procedures</p>
+              )}
             </Section>
 
             <Section title="Medications">
@@ -208,7 +250,6 @@ const PreviewModal = forwardRef<HTMLDivElement, PreviewModalProps>(
   }
 );
 
-// ✅ Add displayName to fix forwardRef issue
 PreviewModal.displayName = 'PreviewModal';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
