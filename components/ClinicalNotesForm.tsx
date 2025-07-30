@@ -41,7 +41,7 @@ const ClinicalNotesForm: React.FC<ClinicalNotesFormProps> = ({ clinicalNotes, se
   const [icdSearch, setIcdSearch] = useState('');
   const [showIcdDropdown, setShowIcdDropdown] = useState(false);
   const [showProcedureOptions, setShowProcedureOptions] = useState(false);
-  const [selectedProcedures, setSelectedProcedures] = useState<{ code: string; desc: string; qty: string }[]>([]);
+  const [/*selectedProcedures*/, setSelectedProcedures] = useState<{ code: string; desc: string; qty: string }[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
